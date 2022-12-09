@@ -6,28 +6,32 @@
 //
 
 import UIKit
+import Common
 
-struct MainCoord: Coordinator {
+public struct MainCoord: Coordinator {
     weak var rootController: UINavigationController?
     
-    init(rootController: UINavigationController) {
+    public init(rootController: UINavigationController) {
         self.rootController = rootController
     }
     
-    func firstScreen() -> UIViewController {
+    public func firstScreen(input: DeepLink?) -> UIViewController {
         let vm = ViewModel(text: "First") {
             second()
         }
         return ViewController(vm)
     }
     
-    func start(input: DeepLink?) {
+    public func start(input: DeepLink?) {
         guard let deeplink = input else {
-            let vc = firstScreen()
+            let vc = firstScreen(input: input)
             rootController?.pushViewController(vc, animated: true)
             return
-        }
-        
+        }        
+    }
+    
+    public func finish(output: Void) {
+        rootController?.dismiss(animated: true)
     }
     
     private func second() {
@@ -40,15 +44,11 @@ struct MainCoord: Coordinator {
     
     private func childCoord() {
         let newNavController = UINavigationController()
-        let coord = ChildCoord(rootController: newNavController) {
+        let coord = Dependencies.childCoordinator((newNavController, {
             finish(output: ())
-        }
-        let vc = coord.firstScreen()
+        }))
+        let vc = coord.firstScreen(input: ())
         newNavController.pushViewController(vc, animated: false)
         rootController?.present(newNavController, animated: true)
-    }
-    
-    func finish(output: Void) {
-        rootController?.dismiss(animated: true)
     }
 }

@@ -6,25 +6,26 @@
 //
 
 import UIKit
+import Common
 
-struct ChildCoord: Coordinator {
+public struct ChildCoord: Coordinator {
     weak var rootController: UINavigationController?
     private let completion: VoidClosure
     
-    init(rootController: UINavigationController, completion: @escaping VoidClosure) {
+    public init(rootController: UINavigationController, completion: @escaping VoidClosure) {
         self.rootController = rootController
         self.completion = completion
     }
     
-    func firstScreen() -> UIViewController {
+    public func firstScreen(input: Void) -> UIViewController {
         let vm = ViewModel(text: "First Child") {
             self.second()
         }
         return ViewController(vm)
     }
     
-    func start(input: Void) {
-        let vc = firstScreen()
+    public func start(input: Void) {
+        let vc = firstScreen(input: input)
         rootController?.pushViewController(vc, animated: true)
     }
     
@@ -36,7 +37,7 @@ struct ChildCoord: Coordinator {
         rootController?.pushViewController(vc, animated: true)
     }
     
-    func finish(output: Void) {
+    public func finish(output: Void) {
         self.completion()
     }
 }

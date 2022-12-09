@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Common
 
 struct ViewModel {
     let input: Input

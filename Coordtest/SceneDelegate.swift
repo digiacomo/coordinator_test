@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Feature1
+import Feature2
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -13,6 +15,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        Feature1.inject(
+            dependencies: .init { navController, completion in
+                ChildCoord(rootController: navController, completion: completion).eraseToAnyCoordinator
+            }
+        )
+        
         /// 1. Capture the scene
         guard let windowScene = (scene as? UIWindowScene) else { return }
         

@@ -33,7 +33,7 @@ contains Navigation implementation represented by ChildCoord
 mock View and ViewModel
 
 ### The problem and solution
-Navigation on `MainCoordinator` (Feature1) has a dependency on a `ChildCoord` (Feature2) however, we don't want to expose `ChildCoord` type to `Feature1` as this would imply `Feature2` to be visible to `Feature1`. Therefore the dependency is expressed as a `Coordinator<Void, Void>`. Which is a coordinator that takes `Input` and `Output`s nothing.
+Navigation on `MainCoordinator` (Feature1) has a dependency on a `ChildCoord` (Feature2) however, we don't want to expose `ChildCoord` type to `Feature1` as this would imply `Feature2` to be visible to `Feature1`. Therefore the dependency is expressed as a `Coordinator<Void, Void>`. Which is a coordinator that takes no `Input` and `Output`s nothing.
 
 - The injection happens in CoordTest which is the only scope where we have visibility on Feature1 and 2 at the same time.
 - We could be having any kind of Input and Output and in case we have multiple inputs we can use Tuples.

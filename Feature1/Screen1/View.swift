@@ -21,6 +21,7 @@ extension ViewController {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitle("Go", for: .normal)
+            button.backgroundColor = .black
             return button
         }()
         
@@ -36,10 +37,10 @@ extension ViewController {
             [label, button].forEach(vStack.addArrangedSubview)
             addSubview(vStack)
             NSLayoutConstraint.activate([
-                self.topAnchor.constraint(equalTo: vStack.topAnchor),
-                self.bottomAnchor.constraint(equalTo: vStack.bottomAnchor),
-                self.leftAnchor.constraint(equalTo: vStack.leftAnchor),
-                self.rightAnchor.constraint(equalTo: vStack.rightAnchor),
+                self.safeAreaLayoutGuide.topAnchor.constraint(equalTo: vStack.topAnchor),
+                self.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: vStack.bottomAnchor),
+                self.safeAreaLayoutGuide.leftAnchor.constraint(equalTo: vStack.leftAnchor),
+                self.safeAreaLayoutGuide.rightAnchor.constraint(equalTo: vStack.rightAnchor),
             ])
         }
         
